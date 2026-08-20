@@ -2,9 +2,14 @@
 #include<iostream>
 using namespace std;
 
+#define DATA_FILE "parts.txt"
+
 int main()
 {
     PartManager manager;
+
+     // 启动时加载
+    manager.loadFromFile(DATA_FILE);
     int choice;
 
     
@@ -44,5 +49,8 @@ int main()
         }
     }
     
+    // 退出前保存
+    manager.saveToFile(DATA_FILE);
+
     return 0;
 }

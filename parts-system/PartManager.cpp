@@ -1,6 +1,9 @@
 #include"PartManager.h"
 #include<iostream>
 #include<string>
+#include <fstream>
+
+
 
 using namespace std;
 
@@ -35,4 +38,27 @@ using namespace std;
                 return;
             }
         }
+    }
+
+    void PartManager::saveToFile(const string& filename) const
+    {
+            ofstream out(filename);
+    for (const auto& p : parts) {
+        out << p.getId() << " " << p.getName() << " " 
+            << p.getCategory() << " " << p.getPrice() << endl;
+    }
+    cout << "保存成功: " << parts.size() << " 个零件" << endl;
+   }
+    
+    void PartManager::loadFromFile(const string& filename)
+    {
+        ifstream in(filename);
+    int id;
+    string name, category;
+    double price;
+    while (in >> id >> name >> category >> price) {
+        parts.emplace_back(id, name, category, price);
+    }
+    cout << "加载成功: " << parts.size() << " 个零件" << endl;
+
     }
